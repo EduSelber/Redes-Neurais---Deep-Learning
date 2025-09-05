@@ -1,0 +1,19 @@
+{
+  "type": "minmax_pm1",
+  "min": {
+    "Age": 0.0,
+    "RoomService": 0.0,
+    "FoodCourt": 0.0,
+    "ShoppingMall": 0.0,
+    "Spa": 0.0,
+    "VRDeck": 0.0
+  },
+  "max": {
+    "Age": 79.0,
+    "RoomService": 14327.0,
+    "FoodCourt": 29813.0,
+    "ShoppingMall": 23492.0,
+    "Spa": 22408.0,
+    "VRDeck": 24133.0
+  }
+}
