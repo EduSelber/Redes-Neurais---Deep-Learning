@@ -1,0 +1,26 @@
+site_name: Redes--deep-learning
+site_url: https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/
+repo_url: https://github.com/EduSelber/Redes-Neurais---Deep-Learning.git
+repo_name: Redes-Neurais---Deep-Learning.git
+
+theme:
+  name: material   # requer mkdocs-material instalado
+  features:
+    - navigation.tabs
+    - navigation.sections
+
+nav:
+  - Início: index.md
+  - Guia:
+      - Instalação: guia/instalacao.md
+      - Uso: guia/uso.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+
+plugins:
+  - search
