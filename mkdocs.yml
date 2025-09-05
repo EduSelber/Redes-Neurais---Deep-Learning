@@ -14,6 +14,7 @@ nav:
   - Guia:
       - Instalação: guia/instalacao.md
       - Uso: guia/uso.md
+  - 1.Data: data.md
 
 markdown_extensions:
   - admonition
