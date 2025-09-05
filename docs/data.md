@@ -4,108 +4,152 @@ Esta página documenta meu notebook `codes.ipynb` para a atividade **1. Data** d
 
 ---
 
-## Visão geral
-
-- **Objetivo**: gerar/inspecionar dados e prepará-los para redes neurais, incluindo normalização adequada para camadas com `tanh`.
-- **Entrega**: página no GitHub Pages com explicações, código e visualizações solicitadas.
-- **Dataset real (Ex. 3)**: *Spaceship Titanic*, cujo alvo `Transported` indica se o passageiro foi transportado para outra dimensão.
-
----
-
-## Ambiente e execução
-
-1. **Abrir o notebook**: `codes.ipynb`.
-2. **Executar as células na ordem** (Kernel → Restart & Run All) para gerar os gráficos e tabelas.
-3. **Exportar gráficos** (se necessário) para incluir na página: use `plt.savefig('figs/<nome>.png', dpi=150)` antes de `plt.show()`.
-
-> Observação: a página foi escrita considerando o conteúdo já presente no notebook (células de geração de dados e visualização nos Exercícios 1 e 2, e seção de pré-processamento para o Exercício 3).
-
----
 
 ## Exercício 1 — *Exploring Class Separability in 2D*
 
-### O que fiz
-- **Geração de dados 2D**: criação de um dicionário `data` com chaves `x`, `y`, `class` e `color`, seguido de conversão para `DataFrame` (`df`).  
-- **Visualização**: `df.plot.scatter(x='x', y='y', c='color', colormap='viridis')` para destacar classes por cor.
-- **Análise**: discussão textual sobre sobreposição e possíveis fronteiras de decisão lineares entre grupos (registrada em célula markdown).
+## Generate  the data:
 
-### Como reproduzir
-- Execute as três primeiras células do notebook (importações, criação do `DataFrame` e `scatter`). Garanta que cada classe tenha uma cor distinta.
-- **Responda às perguntas do enunciado**: descreva distribuição/overlap e esboce (ou explique) as possíveis *decision boundaries*.
+```python
+data = {'x': [], 'y':[], 'class':[], 'color': []}
 
-**Checklist (rubrica do curso)**  
-☑ Dados gerados e *scatter* claro.  
-☑ Análise de separabilidade e fronteiras coerentes.  
 
+mean_std_dev = [([2,3], np.diag([0.8, 2.5])) ,
+([5,6], np.diag([1.2, 1.9])),
+([8,1], np.diag([0.9, 0.9])),
+([15,4], np.diag([0.5, 2.0]))]
+mean = [2, 3]
+cov = np.diag([0.8, 2.5])
+for i in range(0, 4):
+
+    mean = mean_std_dev[i][0]
+    cov = mean_std_dev[i][1]
+
+    x, y = np.random.multivariate_normal(mean, cov, 100).T
+    classe = []
+    for c in range(0, len(x)):
+        data['x'].append(x[c])
+        data['y'].append(y[c])
+        data['class'].append(f"class_{i}")
+        if i == 0:
+            data['color'].append((1.0, 0.0, 0.0))
+        if i == 1:
+            data['color'].append((1.0,0.0,1.0,))
+        if i == 2:
+            data['color'].append((1.0, 1.0, 0.0))
+        if i == 3:
+            data['color'].append((1.0, 0.5, 0.5))
+```
+
+### Ploting the Data
+![Texto alternativo](docs/img/imagem.png)
+
+### Analyze and Draw Boundaries
+a. Percebe-se que as duas classes mais a direita estão bme disntintas. Enquanto, que as duas a mais esquerda, vermelho e roxo, apresentam um overlap entre elas.
+
+b.Observando o plot precisa de tres  linear boundays, para poder distinguir, uma vez que com uma apenas daria para separar entre duas metade  esquerdo e direito, e teria duas classes em cada.Além de que com duas um lado ficaria com duas clssses, sendo necessário então uma terceira linha para separar estas duas.
+
+c.
+![Texto alternativo](docs/img/imagem2.png)
 ---
 
 ## Exercício 2 — *Non-Linearity in Higher Dimensions*
 
-### O que fiz
-- **Semente reprodutível** com NumPy (ex.: `rng = np.random.default_rng(42)`).
-- **Geração 5D** para duas classes com médias/covariâncias distintas (ver enunciado para os valores).  
-- **Redução de dimensionalidade (PCA)**: projeção para 2D e *scatter* colorido por classe.
+## Generate  the data:
 
-> Dica: conferi que a projeção 2D evidencie relações não lineares, motivando arquiteturas com ativações não lineares (MLP) em vez de modelos lineares simples.  
+```python
+import numpy as np
+import pandas as pd
 
-**Checklist (rubrica do curso)**  
-☑ Dados 5D gerados conforme parâmetros.  
-☑ PCA aplicado e *scatter* claro.  
-☑ Discussão sobre (não) linearidade e por que redes com não linearidades são adequadas.  
+rng = np.random.default_rng(42)
+data = {
+    'x1': [], 'x2': [], 'x3': [], 'x4': [], 'x5': [],
+    'class': [], 'color': []
+}
+params = [
+    (
+        np.array([0.0, 0.0, 0.0, 0.0, 0.0]),
+        np.array([
+            [1.0, 0.8, 0.1, 0.0, 0.0],
+            [0.8, 1.0, 0.3, 0.0, 0.0],
+            [0.1, 0.3, 1.0, 0.5, 0.0],
+            [0.0, 0.0, 0.5, 1.0, 0.2],
+            [0.0, 0.0, 0.0, 0.2, 1.0],
+        ]),
+        "class_A",
+        (1.0, 0.0, 0.0), 
+    ),
+    (
+        np.array([1.5, 1.5, 1.5, 1.5, 1.5]),
+        np.array([
+            [1.5, -0.7, 0.2, 0.0, 0.0],
+            [-0.7, 1.5, 0.4, 0.0, 0.0],
+            [0.2, 0.4, 1.5, 0.6, 0.0],
+            [0.0, 0.0, 0.6, 1.5, 0.3],
+            [0.0, 0.0, 0.0, 0.3, 1.5],
+        ]),
+        "class_B",
+        (0.0, 0.0, 1.0), 
+    ),
+]
+
+n_per_class = 500
+
+for mean, cov, label, color in params:
+    samples = rng.multivariate_normal(mean, cov, size=n_per_class)
+    for s in samples:
+        data['x1'].append(s[0])
+        data['x2'].append(s[1])
+        data['x3'].append(s[2])
+        data['x4'].append(s[3])
+        data['x5'].append(s[4])
+        data['class'].append(label)
+        data['color'].append(color)
+
+
+df = pd.DataFrame(data)
+
+```
+
+### Visualize the data 
+![](docs/imgs/image1.png)
+
+### Analyzethe plot
+a. Observando percebe-se que os vermelhos tem a tendencia a ficar no lado esquerdo, enquanto os azuis tendem a ficar no lado direito. No entanto, isto não é verdade para todos,uma vez que é possível encontrar alguns pontos invadindo os territórios, ou seja, se desenhasse uma linha no meio não teria uma acuracia muito boa, por conta desta mistura entre as classes.
+
+b.Este tipo de data impoe um desafio,uma vez que o modelo teria dificuldade para pegar esses corner cases, uma vez que precisaria de um grande numero de linhas para contornar, o que também pode pender para um overfitting.
+
+c.
+![](docs/imgs/image2.png)
 
 ---
 
 ## Exercício 3 — *Preparing Real-World Data for a Neural Network*
 
-### Dados
-- **Fonte**: Kaggle — *Spaceship Titanic*.  
-- **Alvo (`Transported`)**: binário; indica se o passageiro foi transportado para outra dimensão.  
-- **Exemplos de atributos**: `HomePlanet`, `CryoSleep`, `Destination` (categóricos) e `Age`, `RoomService`, `FoodCourt`, `ShoppingMall`, `Spa`, `VRDeck` (numéricos), além de `VIP`, `Cabin`, `Name`.
+### Describe the Data
+- O objetivo do dataset "Spaceship Titanic" é prever se os passageiros foram transportados para outra dimensão, sendo que a coluna "Transported" representa isto, ou seja se nela estiver o valor 1 significa que o passageiro foi tranportado, caso seja 0 não.
 
-> Dica: o conjunto costuma estar razoavelmente balanceado entre `True`/`False` para `Transported`, o que ajuda na avaliação de classificadores.  
+- Features numericos: Age, RoomService, FoodCourt, ShoppingMall, Spa, VRDeck
+- Features categóricos: PassengerId, HomePlanet, CryoSleep, Cabin, Destination, VIP, Name
 
-### Pipeline de pré-processamento adotado
-1. **Carregamento e inspeção**: `df.info()`, `df.isna().sum()` para mapear *missing* por coluna.  
-2. **Tratamento de ausentes**:  
-   - Numéricos: imputação com mediana (robusto a *outliers*).  
-   - Categóricos: imputação com *most frequent* (modo) ou categoria explícita `"Unknown"` quando apropriado — documente a escolha.  
-3. **Codificação categórica**: *one-hot encoding* para `HomePlanet`, `CryoSleep`, `Destination`, `VIP` (usar `.astype(str)` se necessário antes do `get_dummies`).  
-4. **Escalonamento para `tanh`**:  
-   - Justificativa: `tanh` é centrada em zero e satura fora de ~±2; padronizar (média 0, desvio 1) ou normalizar para `[-1, 1]` acelera o treino e evita saturação.  
-   - Implementação: `StandardScaler()` **ou** normalização min-max seguida de mapeamento para `[-1, 1]`. O enunciado aceita ambos; documentei a opção utilizada.  
-5. **Visualizações**: histogramas de `Age` e/ou `FoodCourt` **antes e depois** do escalonamento para evidenciar o efeito da transformação.  
+-Colunas com "missing values" e as quantidades
+Colunas com faltantes:
+CryoSleep       217
+ShoppingMall    208
+VIP             203
+HomePlanet      201
+Name            200
+Cabin           199
+VRDeck          188
+FoodCourt       183
+Spa             183
+Destination     182
+RoomService     181
+Age             179
 
-### Saídas esperadas
-- Tabela (ou *print*) com contagem de *missing* por coluna.  
-- Lista das colunas numéricas vs. categóricas com a estratégia aplicada.  
-- Gráficos comparando distribuições pré vs. pós-escalonamento.  
-- `df_final` pronto para treino; `Transported` separado em `y`/`transported` e *features* em `X`/`df_train` (seu notebook pode optar por nomes equivalentes).
 
-**Checklist (rubrica do curso)**  
-☑ Dados carregados e descritos corretamente.  
-☑ *Missing*, *encoding* e *scaling* (centrado para `tanh`) implementados e justificados.  
-☑ Visualizações mostrando o impacto do pré-processamento.  
 
----
-
-## Decisões e justificativas
-
-- **Imputação**: mediana/mode reduzem viés com *outliers* e preservam categorias; quando a semântica faz sentido, uso de `"Unknown"` evita descartar linhas.  
-- **One-hot** em categóricas: mantém relações não ordinais entre categorias (evita codificação numérica arbitrária).  
-- **Escalonamento centrado**: com `tanh`, entradas centradas (média≈0) ajudam a manter ativações na zona quase linear e gradientes estáveis — melhorando convergência.  
-
----
-
-## Conclusões
-
-- **Ex. 1**: a distribuição 2D mostra regiões com sobreposição parcial; fronteiras estritamente lineares não separam todos os grupos com folga.  
-- **Ex. 2**: a projeção 2D (via PCA) evidencia padrões não lineares, motivando MLPs com ativações não lineares.  
-- **Ex. 3**: com imputação adequada, *one-hot* e escalonamento centrado, o *dataset* fica pronto para uma MLP com camadas `tanh`, atendendo às exigências do enunciado.  
-
----
 
 ## Referências
 
-- Enunciado oficial e rubrica da atividade (versão **2025.2**).  
-- Descrição do *Spaceship Titanic* e do alvo `Transported`.  
-- Exemplos de significado das colunas e guias de EDA no *Spaceship Titanic*.  
+- Descrição do *Spaceship Titanic* e do alvo `Transported`: https://www.kaggle.com/competitions/spaceship-titanic/data.  
+
