@@ -4,9 +4,9 @@
 ## Exercício 1
 ## A brief description of my approach
 
-Para gerar os dados utiltizo o `multivariate_normal`, que permite eu pasar o array da media e o da covarianca para aplicar a `Gaussian distribution` , por fim aplico um vstack para os vetor X, que pilhas os arrays verticalmente, enquanto para o vetor y utilizo um hstack, que pilhha horizoltamente. 
+Para gerar os dados utilizo a função `multivariate_normal`, que permite passar o vetor de médias e a matriz de covariância para aplicar a distribuição `Gaussiana` multivariada. Em seguida, aplico um vstack para formar o vetor X, empilhando os arrays verticalmente, enquanto para o vetor y utilizo um hstack, que os empilha horizontalmente.
 
-Na implementacao do perceptron faco um loop , para garantir que nao haja um estouro de epocas , caso nao ocorra a convergencia, dentro deste loop antes de entrar em um mais interno zero o updates e o correct. Dentro do loop interno verifico se ha um errro, caso sim recalulo os pesoas e o bias term , porem se nao ocorreu nenhum erro significa que convergiu e quebro o loop.
+Na implementação do Perceptron, crio um loop externo para limitar o número máximo de épocas, caso não ocorra a convergência. Dentro desse loop, antes de entrar no interno, inicializo as variáveis updates e correct com zero. No loop interno, verifico se ocorre algum erro; em caso positivo, recalculo os pesos e o viés. Caso não ocorra nenhum erro durante toda a época, significa que houve convergência, e o loop é interrompido.
 
 ## Generate  the data:
 
