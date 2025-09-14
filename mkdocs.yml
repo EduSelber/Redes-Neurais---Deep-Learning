@@ -4,7 +4,7 @@ repo_url: https://github.com/EduSelber/Redes-Neurais---Deep-Learning.git
 repo_name: Redes-Neurais---Deep-Learning.git
 
 theme:
-  name: material   # requer mkdocs-material instalado
+  name: material   
   features:
     - navigation.tabs
     - navigation.sections
@@ -15,6 +15,7 @@ nav:
       - Instalação: guia/instalacao.md
       - Uso: guia/uso.md
   - 1.Data: data.md
+  - 2.Perceptron: perceptron.md
 
 markdown_extensions:
   - admonition
