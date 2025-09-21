@@ -4,7 +4,7 @@
 ## Exercício 1
 ## A brief description of my approach
 
-Para
+Implemento, em código direto e sem funções, o fluxo completo forward → loss → backward → update de um MLP com tanh na camada escondida e na saída, usando MSE para uma única amostra. Imprimo todas as grandezas intermediárias (pré-ativações, ativações, gradientes de pesos e vieses) e faço a atualização com η = 0,1, para validar numericamente a cadeia de derivadas que será reutilizada nos demais exercícios.
 
 ## Code:
 
@@ -113,7 +113,7 @@ b1_new = [ 0.15093698 -0.23180324]
 ## Exercício 2
 ## A brief description of my approach
 
-Para
+Gero um conjunto binário com make_classification, em que a classe 0 tem 1 cluster e a classe 1 tem 2 clusters. Treino um MLP 2–32–1 escrito inline tanh na escondida, sigmoid na saída e Binary Cross-Entropy como perda. O treinamento é via mini-batch gradient descent, com retropropagação manual dos gradientes e avaliação por acurácia no conjunto de teste.
 
 ## Code:
 
@@ -235,7 +235,7 @@ Test accuracy (binary): 0.890
 ## Exercício 3
 ## A brief description of my approach
 
-Para
+Formulo um problema multiclasse (3 classes, 4 features), construindo 2/3/4 clusters por classe pela união de subconjuntos. Treino um MLP 4–64–3 também inline, trocando a cabeça para softmax + cross-entropy. Para estabilidade numérica, subtraio o máximo por amostra antes do exp e aplico clipping nas probabilidades; a lógica de treino e retroprop permanece a mesma do Ex. 2, evidenciando reuso conceitual.
 
 ## Code:
 
@@ -378,7 +378,7 @@ Test accuracy (3 classes): 0.817
 ## Exercício 4
 ## A brief description of my approach
 
-Para
+Repito o cenário do Ex. 3, mas aprofundo o modelo para 4–64–32–3, adicionando uma segunda camada escondida. Mantenho a implementação inline e os mesmos cuidados numéricos (softmax estabilizado + CE), comparando a acurácia de teste com a versão menos profunda para observar o impacto da profundidade sob uma rotina de treino e backprop idêntica.
 
 ## Code:
 
