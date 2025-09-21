@@ -16,6 +16,7 @@ nav:
       - Uso: guia/uso.md
   - 1.Data: data.md
   - 2.Perceptron: perceptron.md
+  - 3.MLP: MLP.md
 
 markdown_extensions:
   - admonition
