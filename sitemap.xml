@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/MLP/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/data/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/perceptron/</loc>
-         <lastmod>2025-09-21</lastmod>
+         <lastmod>2025-10-26</lastmod>
+    </url>
+    <url>
+         <loc>https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/vae/</loc>
+         <lastmod>2025-10-26</lastmod>
     </url>
 </urlset>

@@ -8,19 +8,23 @@
       
       
       
+        <link rel="canonical" href="https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/vae/">
+      
+      
+        <link rel="prev" href="../MLP/">
       
       
       
-      <link rel="icon" href="/Redes-Neurais---Deep-Learning.git/assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
-        <title>Redes--deep-learning</title>
+        <title>4.VAE - Redes--deep-learning</title>
       
     
     
-      <link rel="stylesheet" href="/Redes-Neurais---Deep-Learning.git/assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -39,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("/Redes-Neurais---Deep-Learning.git/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -57,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#resultados-e-analise-vae-variational-autoencoder" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -67,7 +76,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/Redes-Neurais---Deep-Learning.git/." title="Redes--deep-learning" class="md-header__button md-logo" aria-label="Redes--deep-learning" data-md-component="logo">
+    <a href=".." title="Redes--deep-learning" class="md-header__button md-logo" aria-label="Redes--deep-learning" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -87,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              4.VAE
             
           </span>
         </div>
@@ -172,7 +181,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -193,7 +202,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/Redes-Neurais---Deep-Learning.git/guia/instalacao.md" class="md-tabs__link">
+        <a href="../guia/instalacao.md" class="md-tabs__link">
           
   
   
@@ -211,7 +220,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/data/" class="md-tabs__link">
+      <a href="../data/" class="md-tabs__link">
         
   
   
@@ -230,7 +239,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/perceptron/" class="md-tabs__link">
+      <a href="../perceptron/" class="md-tabs__link">
         
   
   
@@ -249,7 +258,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/MLP/" class="md-tabs__link">
+      <a href="../MLP/" class="md-tabs__link">
         
   
   
@@ -266,9 +275,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/vae/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -303,7 +314,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/Redes-Neurais---Deep-Learning.git/." title="Redes--deep-learning" class="md-nav__button md-logo" aria-label="Redes--deep-learning" data-md-component="logo">
+    <a href=".." title="Redes--deep-learning" class="md-nav__button md-logo" aria-label="Redes--deep-learning" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -333,7 +344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -398,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/guia/instalacao.md" class="md-nav__link">
+      <a href="../guia/instalacao.md" class="md-nav__link">
         
   
   
@@ -421,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/guia/uso.md" class="md-nav__link">
+      <a href="../guia/uso.md" class="md-nav__link">
         
   
   
@@ -451,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/data/" class="md-nav__link">
+      <a href="../data/" class="md-nav__link">
         
   
   
@@ -473,7 +484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/perceptron/" class="md-nav__link">
+      <a href="../perceptron/" class="md-nav__link">
         
   
   
@@ -495,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/MLP/" class="md-nav__link">
+      <a href="../MLP/" class="md-nav__link">
         
   
   
@@ -514,10 +525,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/Redes-Neurais---Deep-Learning.git/vae/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    4.VAE
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -528,6 +561,104 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-dos-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumo dos Resultados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconstrucoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconstruções
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amostras-aleatorias-do-espaco-latente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amostras Aleatórias do Espaço Latente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#espaco-latente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Espaço Latente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafios-e-aprendizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafios e Aprendizados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Desafios e Aprendizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desafios-enfrentados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafios enfrentados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insights-obtidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insights obtidos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -549,6 +680,94 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-dos-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumo dos Resultados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reconstrucoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reconstruções
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amostras-aleatorias-do-espaco-latente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amostras Aleatórias do Espaço Latente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#espaco-latente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Espaço Latente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafios-e-aprendizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafios e Aprendizados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Desafios e Aprendizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desafios-enfrentados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafios enfrentados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insights-obtidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insights obtidos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -560,8 +779,73 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="resultados-e-analise-vae-variational-autoencoder">Resultados e Análise — VAE (Variational Autoencoder)<a class="headerlink" href="#resultados-e-analise-vae-variational-autoencoder" title="Permanent link">&para;</a></h1>
+<h2 id="resumo-dos-resultados">Resumo dos Resultados<a class="headerlink" href="#resumo-dos-resultados" title="Permanent link">&para;</a></h2>
+<p>O modelo <strong>Variational Autoencoder (VAE)</strong> foi treinado no dataset <strong>MNIST</strong> com 20 épocas, utilizando uma arquitetura totalmente conectada (MLP) e um espaço latente bidimensional (<code>LATENT_DIM = 2</code>).<br />
+O objetivo foi aprender uma representação comprimida das imagens de dígitos e gerar novas amostras coerentes com os dados originais.</p>
+<p>Durante o treinamento, observou-se a convergência estável das perdas <strong>BCE (reconstrução)</strong> e <strong>KL (regularização)</strong>.<br />
+A perda de reconstrução diminuiu consistentemente, indicando que o modelo aprendeu a reproduzir bem as entradas, enquanto a divergência KL estabilizou, refletindo o aprendizado de uma distribuição latente regularizada.</p>
+<hr />
+<h2 id="reconstrucoes">Reconstruções<a class="headerlink" href="#reconstrucoes" title="Permanent link">&para;</a></h2>
+<p>As imagens abaixo mostram os dígitos originais (linha superior) e suas respectivas reconstruções (linha inferior) feitas pelo VAE após o treinamento.</p>
+<p><img alt="Reconstruções" src="../imgs/image8.png" /></p>
+<p><strong>Análise:</strong><br />
+As reconstruções são bastante fiéis aos dígitos originais. Pequenas regiões borradas aparecem em dígitos mais complexos (como 3 e 8), o que é esperado dado o uso de uma rede MLP simples e o baixo tamanho do espaço latente (2D).</p>
+<hr />
+<h2 id="amostras-aleatorias-do-espaco-latente">Amostras Aleatórias do Espaço Latente<a class="headerlink" href="#amostras-aleatorias-do-espaco-latente" title="Permanent link">&para;</a></h2>
+<p>O modelo também foi avaliado em sua capacidade generativa, amostrando vetores <code>z ~ N(0, I)</code> e decodificando-os em imagens.</p>
+<p><img alt="Amostras Aleatórias" src="../imgs/image9.png" /></p>
+<p><strong>Análise:</strong><br />
+As imagens sintetizadas são coerentes e diversas, reproduzindo diferentes dígitos com boa qualidade visual.<br />
+Alguns exemplos apresentam leve borramento — um indicativo de sobreposição de regiões no espaço latente, algo esperado com <code>LATENT_DIM = 2</code>.</p>
+<hr />
+<h2 id="espaco-latente">Espaço Latente<a class="headerlink" href="#espaco-latente" title="Permanent link">&para;</a></h2>
+<p>A figura abaixo mostra o <strong>espaço latente</strong> aprendido, utilizando as médias <code>μ</code> geradas pelo encoder. Cada ponto representa uma imagem, colorido de acordo com sua classe (dígito de 0 a 9).</p>
+<p><img alt="Espaço Latente" src="../imgs/image10.png" /></p>
+<p><strong>Análise:</strong><br />
+O gráfico evidencia que o VAE conseguiu <strong>organizar o espaço latente de forma estruturada</strong>, separando diferentes classes em regiões distintas.<br />
+Mesmo com apenas duas dimensões, é possível observar <strong>clusters bem definidos</strong> (por exemplo, dígitos 0, 1 e 7 aparecem claramente isolados).</p>
+<hr />
+<h2 id="desafios-e-aprendizados">Desafios e Aprendizados<a class="headerlink" href="#desafios-e-aprendizados" title="Permanent link">&para;</a></h2>
+<h3 id="desafios-enfrentados"><strong>Desafios enfrentados</strong><a class="headerlink" href="#desafios-enfrentados" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Compatibilidade de versões entre <strong>TensorFlow</strong>, <strong>NumPy</strong> e <strong>Python 3.12</strong> durante a instalação.  </li>
+<li>Ajuste do <strong>espaço latente (dimensão 2)</strong>: dimensões muito pequenas reduzem a qualidade das reconstruções, mas são ideais para visualização.  </li>
+<li>Balancear as perdas <strong>BCE</strong> e <strong>KL</strong>: um valor alto de KL pode levar a amostras menos nítidas, enquanto valores baixos reduzem a diversidade gerada.</li>
+</ul>
+<h3 id="insights-obtidos"><strong>Insights obtidos</strong><a class="headerlink" href="#insights-obtidos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Mesmo com uma arquitetura simples (MLP), o VAE é capaz de <strong>aprender distribuições latentes significativas</strong> e <strong>gerar novos exemplos realistas</strong>.  </li>
+<li>O espaço latente 2D permite <strong>interpretabilidade visual</strong>: é possível entender como os diferentes dígitos se distribuem e se relacionam.  </li>
+<li>A regularização KL é fundamental para que o modelo aprenda uma <strong>distribuição contínua e suave</strong>, essencial para a geração de novas amostras.</li>
+</ul>
+<hr />
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>O experimento demonstra o funcionamento prático de um <strong>Variational Autoencoder</strong>, mostrando:
+- <strong>Reconstrução fiel das imagens originais</strong>,<br />
+- <strong>Capacidade generativa realista</strong>,<br />
+- <strong>Organização semântica no espaço latente</strong>.</p>
+<p>O modelo atendeu a todos os objetivos do exercício, ilustrando de forma clara a relação entre <strong>autoencoders</strong>, <strong>aprendizado de representações</strong> e <strong>geração de dados</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -597,10 +881,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "/Redes-Neurais---Deep-Learning.git/", "features": ["navigation.tabs", "navigation.sections"], "search": "/Redes-Neurais---Deep-Learning.git/assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/Redes-Neurais---Deep-Learning.git/assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>
