@@ -17,6 +17,7 @@ nav:
   - 1.Data: data.md
   - 2.Perceptron: perceptron.md
   - 3.MLP: MLP.md
+  - 4.VAE: vae.md
 
 markdown_extensions:
   - admonition

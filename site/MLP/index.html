@@ -1,0 +1,1534 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://EduSelber.github.io/Redes-Neurais---Deep-Learning.git/MLP/">
+      
+      
+        <link rel="prev" href="../perceptron/">
+      
+      
+        <link rel="next" href="../vae/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>3.MLP - Redes--deep-learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#atividade-3-mlp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Redes--deep-learning" class="md-header__button md-logo" aria-label="Redes--deep-learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Redes--deep-learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.MLP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/EduSelber/Redes-Neurais---Deep-Learning.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Redes-Neurais---Deep-Learning.git
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../guia/instalacao.md" class="md-tabs__link">
+          
+  
+  
+  Guia
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  1.Data
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../perceptron/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  2.Perceptron
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  3.MLP
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../vae/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  4.VAE
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Redes--deep-learning" class="md-nav__button md-logo" aria-label="Redes--deep-learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Redes--deep-learning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/EduSelber/Redes-Neurais---Deep-Learning.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Redes-Neurais---Deep-Learning.git
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guia
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Guia
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia/instalacao.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guia/uso.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1.Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2.Perceptron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3.MLP
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3.MLP
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-pass-z1-027-018-h1-tanhz1-026362484-017808087-u2-038523667817130075-yhat-tanhu2-036724656264510797-loss-l-04003769124844312-backward-pass-gradients-dldyhat-1265506874709784-dldu2-10948279147135995-dldw2-028862383-019496791-dldb2-10948279147135995-dldh1-054741396-032844837-dldz1-050936975-031803236-dldw1-025468488-010187395-015901618-006360647-dldb1-050936975-031803236-updated-parameters-eta-01-w2_new-052886238-031949679-b2_new-030948279147136-w1_new-032546849-01101874-018409838-040636065-b1_new-015093698-023180324" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward pass: z1 = [ 0.27 -0.18] h1 = tanh(z1) = [ 0.26362484 -0.17808087] u2 = 0.38523667817130075 yhat = tanh(u2) = 0.36724656264510797 Loss L = 0.4003769124844312 Backward pass (gradients): dL/dyhat = -1.265506874709784 dL/du2 = -1.0948279147135995 dL/dW2 = [-0.28862383 0.19496791] dL/db2 = -1.0948279147135995 dL/dh1 = [-0.54741396 0.32844837] dL/dz1 = [-0.50936975 0.31803236] dL/dW1 = [[-0.25468488 0.10187395] [ 0.15901618 -0.06360647]] dL/db1 = [-0.50936975 0.31803236] Updated parameters (eta = 0.1): W2_new = [ 0.52886238 -0.31949679] b2_new = 0.30948279147136 W1_new = [[ 0.32546849 -0.1101874 ] [ 0.18409838 0.40636065]] b1_new = [ 0.15093698 -0.23180324]
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#epoch-1-loss-04612-epoch-50-loss-02585-epoch-100-loss-01581-epoch-150-loss-02104-epoch-200-loss-01864-epoch-250-loss-02356-epoch-300-loss-01400-test-accuracy-binary-0890" class="md-nav__link">
+    <span class="md-ellipsis">
+      epoch 1 | loss 0.4612 epoch 50 | loss 0.2585 epoch 100 | loss 0.1581 epoch 150 | loss 0.2104 epoch 200 | loss 0.1864 epoch 250 | loss 0.2356 epoch 300 | loss 0.1400 Test accuracy (binary): 0.890
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#epoch-1-loss-08970-epoch-50-loss-05367-epoch-100-loss-03963-epoch-150-loss-03406-epoch-200-loss-03817-epoch-250-loss-03475-epoch-300-loss-02155-test-accuracy-3-classes-0817" class="md-nav__link">
+    <span class="md-ellipsis">
+      epoch 1 | loss 0.8970 epoch 50 | loss 0.5367 epoch 100 | loss 0.3963 epoch 150 | loss 0.3406 epoch 200 | loss 0.3817 epoch 250 | loss 0.3475 epoch 300 | loss 0.2155 Test accuracy (3 classes): 0.817
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vae/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4.VAE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-pass-z1-027-018-h1-tanhz1-026362484-017808087-u2-038523667817130075-yhat-tanhu2-036724656264510797-loss-l-04003769124844312-backward-pass-gradients-dldyhat-1265506874709784-dldu2-10948279147135995-dldw2-028862383-019496791-dldb2-10948279147135995-dldh1-054741396-032844837-dldz1-050936975-031803236-dldw1-025468488-010187395-015901618-006360647-dldb1-050936975-031803236-updated-parameters-eta-01-w2_new-052886238-031949679-b2_new-030948279147136-w1_new-032546849-01101874-018409838-040636065-b1_new-015093698-023180324" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward pass: z1 = [ 0.27 -0.18] h1 = tanh(z1) = [ 0.26362484 -0.17808087] u2 = 0.38523667817130075 yhat = tanh(u2) = 0.36724656264510797 Loss L = 0.4003769124844312 Backward pass (gradients): dL/dyhat = -1.265506874709784 dL/du2 = -1.0948279147135995 dL/dW2 = [-0.28862383 0.19496791] dL/db2 = -1.0948279147135995 dL/dh1 = [-0.54741396 0.32844837] dL/dz1 = [-0.50936975 0.31803236] dL/dW1 = [[-0.25468488 0.10187395] [ 0.15901618 -0.06360647]] dL/db1 = [-0.50936975 0.31803236] Updated parameters (eta = 0.1): W2_new = [ 0.52886238 -0.31949679] b2_new = 0.30948279147136 W1_new = [[ 0.32546849 -0.1101874 ] [ 0.18409838 0.40636065]] b1_new = [ 0.15093698 -0.23180324]
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#epoch-1-loss-04612-epoch-50-loss-02585-epoch-100-loss-01581-epoch-150-loss-02104-epoch-200-loss-01864-epoch-250-loss-02356-epoch-300-loss-01400-test-accuracy-binary-0890" class="md-nav__link">
+    <span class="md-ellipsis">
+      epoch 1 | loss 0.4612 epoch 50 | loss 0.2585 epoch 100 | loss 0.1581 epoch 150 | loss 0.2104 epoch 200 | loss 0.1864 epoch 250 | loss 0.2356 epoch 300 | loss 0.1400 Test accuracy (binary): 0.890
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#epoch-1-loss-08970-epoch-50-loss-05367-epoch-100-loss-03963-epoch-150-loss-03406-epoch-200-loss-03817-epoch-250-loss-03475-epoch-300-loss-02155-test-accuracy-3-classes-0817" class="md-nav__link">
+    <span class="md-ellipsis">
+      epoch 1 | loss 0.8970 epoch 50 | loss 0.5367 epoch 100 | loss 0.3963 epoch 150 | loss 0.3406 epoch 200 | loss 0.3817 epoch 250 | loss 0.3475 epoch 300 | loss 0.2155 Test accuracy (3 classes): 0.817
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-description-of-my-approach_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      A brief description of my approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#result_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="atividade-3-mlp">Atividade: 3. MLP<a class="headerlink" href="#atividade-3-mlp" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="exercicio-1">Exercício 1<a class="headerlink" href="#exercicio-1" title="Permanent link">&para;</a></h2>
+<h2 id="a-brief-description-of-my-approach">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach" title="Permanent link">&para;</a></h2>
+<p>Implemento, em código direto e sem funções, o fluxo completo forward → loss → backward → update de um MLP com tanh na camada escondida e na saída, usando MSE para uma única amostra. Imprimo todas as grandezas intermediárias (pré-ativações, ativações, gradientes de pesos e vieses) e faço a atualização com η = 0,1, para validar numericamente a cadeia de derivadas que será reutilizada nos demais exercícios.</p>
+<h2 id="code">Code:<a class="headerlink" href="#code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">W1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span>  <span class="mf">0.4</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>  
+<span class="n">b2</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">eta_update</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+
+<span class="n">z1</span> <span class="o">=</span> <span class="n">W1</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b1</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+<span class="n">u2</span> <span class="o">=</span> <span class="n">W2</span> <span class="o">@</span> <span class="n">h1</span> <span class="o">+</span> <span class="n">b2</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">u2</span><span class="p">)</span>
+
+
+<span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forward pass:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;z1 =&quot;</span><span class="p">,</span> <span class="n">z1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h1 = tanh(z1) =&quot;</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;u2 =&quot;</span><span class="p">,</span> <span class="n">u2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yhat = tanh(u2) =&quot;</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loss L =&quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+
+
+<span class="n">dL_dyhat</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>               
+<span class="n">d_tanh_u2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">u2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">dL_du2</span> <span class="o">=</span> <span class="n">dL_dyhat</span> <span class="o">*</span> <span class="n">d_tanh_u2</span>
+
+
+<span class="n">dL_dW2</span> <span class="o">=</span> <span class="n">dL_du2</span> <span class="o">*</span> <span class="n">h1</span>                 
+<span class="n">dL_db2</span> <span class="o">=</span> <span class="n">dL_du2</span>
+
+
+<span class="n">dL_dh1</span> <span class="o">=</span> <span class="n">dL_du2</span> <span class="o">*</span> <span class="n">W2</span>
+<span class="n">d_tanh_z1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">dL_dz1</span> <span class="o">=</span> <span class="n">dL_dh1</span> <span class="o">*</span> <span class="n">d_tanh_z1</span>            
+<span class="n">dL_dW1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">dL_dz1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">dL_db1</span> <span class="o">=</span> <span class="n">dL_dz1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Backward pass (gradients):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/dyhat =&quot;</span><span class="p">,</span> <span class="n">dL_dyhat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/du2   =&quot;</span><span class="p">,</span> <span class="n">dL_du2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/dW2   =&quot;</span><span class="p">,</span> <span class="n">dL_dW2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/db2   =&quot;</span><span class="p">,</span> <span class="n">dL_db2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/dh1   =&quot;</span><span class="p">,</span> <span class="n">dL_dh1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/dz1   =&quot;</span><span class="p">,</span> <span class="n">dL_dz1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/dW1   =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dL_dW1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dL/db1   =&quot;</span><span class="p">,</span> <span class="n">dL_db1</span><span class="p">)</span>
+
+
+<span class="n">W2_new</span> <span class="o">=</span> <span class="n">W2</span> <span class="o">-</span> <span class="n">eta_update</span> <span class="o">*</span> <span class="n">dL_dW2</span>
+<span class="n">b2_new</span> <span class="o">=</span> <span class="n">b2</span> <span class="o">-</span> <span class="n">eta_update</span> <span class="o">*</span> <span class="n">dL_db2</span>
+<span class="n">W1_new</span> <span class="o">=</span> <span class="n">W1</span> <span class="o">-</span> <span class="n">eta_update</span> <span class="o">*</span> <span class="n">dL_dW1</span>
+<span class="n">b1_new</span> <span class="o">=</span> <span class="n">b1</span> <span class="o">-</span> <span class="n">eta_update</span> <span class="o">*</span> <span class="n">dL_db1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Updated parameters (eta = 0.1):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;W2_new =&quot;</span><span class="p">,</span> <span class="n">W2_new</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b2_new =&quot;</span><span class="p">,</span> <span class="n">b2_new</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;W1_new =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">W1_new</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b1_new =&quot;</span><span class="p">,</span> <span class="n">b1_new</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="result">Result:<a class="headerlink" href="#result" title="Permanent link">&para;</a></h2>
+<h2 id="forward-pass-z1-027-018-h1-tanhz1-026362484-017808087-u2-038523667817130075-yhat-tanhu2-036724656264510797-loss-l-04003769124844312-backward-pass-gradients-dldyhat-1265506874709784-dldu2-10948279147135995-dldw2-028862383-019496791-dldb2-10948279147135995-dldh1-054741396-032844837-dldz1-050936975-031803236-dldw1-025468488-010187395-015901618-006360647-dldb1-050936975-031803236-updated-parameters-eta-01-w2_new-052886238-031949679-b2_new-030948279147136-w1_new-032546849-01101874-018409838-040636065-b1_new-015093698-023180324"><div class="highlight"><pre><span></span><code>Forward<span class="w"> </span>pass:
+<span class="nv">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.27<span class="w"> </span>-0.18<span class="o">]</span>
+<span class="nv">h1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tanh<span class="o">(</span>z1<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.26362484<span class="w"> </span>-0.17808087<span class="o">]</span>
+<span class="nv">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.38523667817130075
+<span class="nv">yhat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tanh<span class="o">(</span>u2<span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.36724656264510797
+Loss<span class="w"> </span><span class="nv">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.4003769124844312
+
+Backward<span class="w"> </span>pass<span class="w"> </span><span class="o">(</span>gradients<span class="o">)</span>:
+dL/dyhat<span class="w"> </span><span class="o">=</span><span class="w"> </span>-1.265506874709784
+dL/du2<span class="w">   </span><span class="o">=</span><span class="w"> </span>-1.0948279147135995
+dL/dW2<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>-0.28862383<span class="w">  </span><span class="m">0</span>.19496791<span class="o">]</span>
+dL/db2<span class="w">   </span><span class="o">=</span><span class="w"> </span>-1.0948279147135995
+dL/dh1<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>-0.54741396<span class="w">  </span><span class="m">0</span>.32844837<span class="o">]</span>
+dL/dz1<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>-0.50936975<span class="w">  </span><span class="m">0</span>.31803236<span class="o">]</span>
+dL/dW1<span class="w">   </span><span class="o">=</span>
+<span class="w"> </span><span class="o">[[</span>-0.25468488<span class="w">  </span><span class="m">0</span>.10187395<span class="o">]</span>
+<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.15901618<span class="w"> </span>-0.06360647<span class="o">]]</span>
+dL/db1<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>-0.50936975<span class="w">  </span><span class="m">0</span>.31803236<span class="o">]</span>
+
+Updated<span class="w"> </span>parameters<span class="w"> </span><span class="o">(</span><span class="nv">eta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.1<span class="o">)</span>:
+<span class="nv">W2_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.52886238<span class="w"> </span>-0.31949679<span class="o">]</span>
+<span class="nv">b2_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.30948279147136
+<span class="nv">W1_new</span><span class="w"> </span><span class="o">=</span>
+<span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="m">0</span>.32546849<span class="w"> </span>-0.1101874<span class="w"> </span><span class="o">]</span>
+<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.18409838<span class="w">  </span><span class="m">0</span>.40636065<span class="o">]]</span>
+<span class="nv">b1_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">0</span>.15093698<span class="w"> </span>-0.23180324<span class="o">]</span>
+</code></pre></div><a class="headerlink" href="#forward-pass-z1-027-018-h1-tanhz1-026362484-017808087-u2-038523667817130075-yhat-tanhu2-036724656264510797-loss-l-04003769124844312-backward-pass-gradients-dldyhat-1265506874709784-dldu2-10948279147135995-dldw2-028862383-019496791-dldb2-10948279147135995-dldh1-054741396-032844837-dldz1-050936975-031803236-dldw1-025468488-010187395-015901618-006360647-dldb1-050936975-031803236-updated-parameters-eta-01-w2_new-052886238-031949679-b2_new-030948279147136-w1_new-032546849-01101874-018409838-040636065-b1_new-015093698-023180324" title="Permanent link">&para;</a></h2>
+<h2 id="exercicio-2">Exercício 2<a class="headerlink" href="#exercicio-2" title="Permanent link">&para;</a></h2>
+<h2 id="a-brief-description-of-my-approach_1">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach_1" title="Permanent link">&para;</a></h2>
+<p>Gero um conjunto binário com make_classification, em que a classe 0 tem 1 cluster e a classe 1 tem 2 clusters. Treino um MLP 2–32–1 escrito inline tanh na escondida, sigmoid na saída e Binary Cross-Entropy como perda. O treinamento é via mini-batch gradient descent, com retropropagação manual dos gradientes e avaliação por acurácia no conjunto de teste.</p>
+<h2 id="code_1">Code:<a class="headerlink" href="#code_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">n_total</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">X0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_total</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span>
+<span class="p">)</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">(</span><span class="n">y0</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> 
+
+<span class="n">X1a</span><span class="p">,</span> <span class="n">y1a</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_total</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+<span class="n">X1b</span><span class="p">,</span> <span class="n">y1b</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="n">n_total</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_total</span><span class="o">//</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n_total</span><span class="o">//</span><span class="mi">4</span><span class="p">),</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">9</span>
+<span class="p">)</span>
+<span class="n">y1a</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y1b</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X0</span><span class="p">,</span> <span class="n">X1a</span><span class="p">,</span> <span class="n">X1b</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">y1b</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="n">in_features</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="n">W1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">in_features</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">in_features</span><span class="p">)</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">h</span><span class="p">,))</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">5e-2</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+
+
+<span class="n">ytr_</span> <span class="o">=</span> <span class="n">ytr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-12</span>
+
+<span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">Xs</span> <span class="o">=</span> <span class="n">Xtr</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">ytr_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="n">Xs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">yb</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+
+
+        <span class="n">z1</span> <span class="o">=</span> <span class="n">xb</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b1</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+
+        <span class="n">u2</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b2</span> 
+        <span class="n">yhat</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">u2</span><span class="p">))</span>
+
+        <span class="n">yclip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">eps</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yb</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yclip</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">yb</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">yclip</span><span class="p">))</span>
+
+
+        <span class="n">B</span> <span class="o">=</span> <span class="n">yb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dL_dyhat</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">yb</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">yclip</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">yclip</span><span class="p">))</span> <span class="o">/</span> <span class="n">B</span>
+        <span class="n">dL_du2</span> <span class="o">=</span> <span class="n">dL_dyhat</span> <span class="o">*</span> <span class="p">(</span><span class="n">yhat</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">yhat</span><span class="p">))</span>  
+
+        <span class="n">dL_dW2</span> <span class="o">=</span> <span class="n">dL_du2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">h1</span>
+        <span class="n">dL_db2</span> <span class="o">=</span> <span class="n">dL_du2</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">dL_dh1</span> <span class="o">=</span> <span class="n">dL_du2</span> <span class="o">@</span> <span class="n">W2</span>
+        <span class="n">dL_dz1</span> <span class="o">=</span> <span class="n">dL_dh1</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">dL_dW1</span> <span class="o">=</span> <span class="n">dL_dz1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">xb</span>
+        <span class="n">dL_db1</span> <span class="o">=</span> <span class="n">dL_dz1</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+        <span class="n">W2</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW2</span>
+        <span class="n">b2</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db2</span>
+        <span class="n">W1</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW1</span>
+        <span class="n">b1</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db1</span>
+
+    <span class="k">if</span> <span class="n">ep</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ep</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;epoch </span><span class="si">{</span><span class="n">ep</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> | loss </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">z1</span> <span class="o">=</span> <span class="n">Xte</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b1</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+<span class="n">u2</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b2</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">u2</span><span class="p">))</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhat</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">ypred</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test accuracy (binary): </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="result_1">Result:<a class="headerlink" href="#result_1" title="Permanent link">&para;</a></h2>
+<h2 id="epoch-1-loss-04612-epoch-50-loss-02585-epoch-100-loss-01581-epoch-150-loss-02104-epoch-200-loss-01864-epoch-250-loss-02356-epoch-300-loss-01400-test-accuracy-binary-0890"><div class="highlight"><pre><span></span><code>epoch<span class="w">   </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.4612
+epoch<span class="w">  </span><span class="m">50</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.2585
+epoch<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.1581
+epoch<span class="w"> </span><span class="m">150</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.2104
+epoch<span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.1864
+epoch<span class="w"> </span><span class="m">250</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.2356
+epoch<span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.1400
+
+Test<span class="w"> </span>accuracy<span class="w"> </span><span class="o">(</span>binary<span class="o">)</span>:<span class="w"> </span><span class="m">0</span>.890
+</code></pre></div><a class="headerlink" href="#epoch-1-loss-04612-epoch-50-loss-02585-epoch-100-loss-01581-epoch-150-loss-02104-epoch-200-loss-01864-epoch-250-loss-02356-epoch-300-loss-01400-test-accuracy-binary-0890" title="Permanent link">&para;</a></h2>
+<h2 id="exercicio-3">Exercício 3<a class="headerlink" href="#exercicio-3" title="Permanent link">&para;</a></h2>
+<h2 id="a-brief-description-of-my-approach_2">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach_2" title="Permanent link">&para;</a></h2>
+<p>Formulo um problema multiclasse (3 classes, 4 features), construindo 2/3/4 clusters por classe pela união de subconjuntos. Treino um MLP 4–64–3 também inline, trocando a cabeça para softmax + cross-entropy. Para estabilidade numérica, subtraio o máximo por amostra antes do exp e aplico clipping nas probabilidades; a lógica de treino e retroprop permanece a mesma do Ex. 2, evidenciando reuso conceitual.</p>
+<h2 id="code_2">Code:<a class="headerlink" href="#code_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="n">n_total</span> <span class="o">=</span> <span class="mi">1500</span>
+<span class="n">n_per</span> <span class="o">=</span> <span class="n">n_total</span> <span class="o">//</span> <span class="mi">3</span>
+
+
+<span class="n">sizes0</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_per</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_per</span> <span class="o">-</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">X0_parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes0</span><span class="p">):</span>
+    <span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                 <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">30</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">yk</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">X0_parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span><span class="p">))</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X0_parts</span><span class="p">]);</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X0_parts</span><span class="p">])</span>
+
+
+<span class="n">sizes1</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_per</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_per</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n_per</span><span class="o">//</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">X1_parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes1</span><span class="p">):</span>
+    <span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                 <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">40</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">yk</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">X1_parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span><span class="p">))</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X1_parts</span><span class="p">]);</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X1_parts</span><span class="p">])</span>
+
+
+<span class="n">sizes2</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_per</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">X2_parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes2</span><span class="p">):</span>
+    <span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                 <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">50</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">yk</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">X2_parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span><span class="p">))</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X2_parts</span><span class="p">]);</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X2_parts</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X0</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">ytr_oh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">C</span><span class="p">)[</span><span class="n">ytr</span><span class="p">]</span>
+<span class="n">yte_oh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">C</span><span class="p">)[</span><span class="n">yte</span><span class="p">]</span>
+
+
+<span class="n">in_features</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">out_features</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">W1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">in_features</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">in_features</span><span class="p">)</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">h</span><span class="p">,))</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">out_features</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">out_features</span><span class="p">,))</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">5e-2</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-12</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">Xs</span> <span class="o">=</span> <span class="n">Xtr</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">ytr_oh</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="n">Xs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">yb</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+
+
+        <span class="n">z1</span> <span class="o">=</span> <span class="n">xb</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b1</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+
+        <span class="n">U</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b2</span>
+        <span class="n">Umax</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">Umax</span><span class="p">)</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">ex</span> <span class="o">/</span> <span class="n">ex</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">yclip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">eps</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yb</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yclip</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">B</span> <span class="o">=</span> <span class="n">yb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dL_dU</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">yb</span><span class="p">)</span> <span class="o">/</span> <span class="n">B</span> 
+
+        <span class="n">dL_dW2</span> <span class="o">=</span> <span class="n">dL_dU</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">h1</span>
+        <span class="n">dL_db2</span> <span class="o">=</span> <span class="n">dL_dU</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">dL_dh1</span> <span class="o">=</span> <span class="n">dL_dU</span> <span class="o">@</span> <span class="n">W2</span>
+        <span class="n">dL_dz1</span> <span class="o">=</span> <span class="n">dL_dh1</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">dL_dW1</span> <span class="o">=</span> <span class="n">dL_dz1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">xb</span>
+        <span class="n">dL_db1</span> <span class="o">=</span> <span class="n">dL_dz1</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">W2</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW2</span>
+        <span class="n">b2</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db2</span>
+        <span class="n">W1</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW1</span>
+        <span class="n">b1</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db1</span>
+
+    <span class="k">if</span> <span class="n">ep</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ep</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;epoch </span><span class="si">{</span><span class="n">ep</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> | loss </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">z1</span> <span class="o">=</span> <span class="n">Xte</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b1</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b2</span>
+<span class="n">Umax</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">Umax</span><span class="p">)</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">ex</span> <span class="o">/</span> <span class="n">ex</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">ypred</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test accuracy (3 classes): </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="result_2">Result:<a class="headerlink" href="#result_2" title="Permanent link">&para;</a></h2>
+<h2 id="epoch-1-loss-08970-epoch-50-loss-05367-epoch-100-loss-03963-epoch-150-loss-03406-epoch-200-loss-03817-epoch-250-loss-03475-epoch-300-loss-02155-test-accuracy-3-classes-0817"><div class="highlight"><pre><span></span><code>epoch<span class="w">   </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.8970
+epoch<span class="w">  </span><span class="m">50</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.5367
+epoch<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.3963
+epoch<span class="w"> </span><span class="m">150</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.3406
+epoch<span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.3817
+epoch<span class="w"> </span><span class="m">250</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.3475
+epoch<span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.2155
+
+Test<span class="w"> </span>accuracy<span class="w"> </span><span class="o">(</span><span class="m">3</span><span class="w"> </span>classes<span class="o">)</span>:<span class="w"> </span><span class="m">0</span>.817
+</code></pre></div><a class="headerlink" href="#epoch-1-loss-08970-epoch-50-loss-05367-epoch-100-loss-03963-epoch-150-loss-03406-epoch-200-loss-03817-epoch-250-loss-03475-epoch-300-loss-02155-test-accuracy-3-classes-0817" title="Permanent link">&para;</a></h2>
+<h2 id="exercicio-4">Exercício 4<a class="headerlink" href="#exercicio-4" title="Permanent link">&para;</a></h2>
+<h2 id="a-brief-description-of-my-approach_3">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach_3" title="Permanent link">&para;</a></h2>
+<p>Repito o cenário do Ex. 3, mas aprofundo o modelo para 4–64–32–3, adicionando uma segunda camada escondida. Mantenho a implementação inline e os mesmos cuidados numéricos (softmax estabilizado + CE), comparando a acurácia de teste com a versão menos profunda para observar o impacto da profundidade sob uma rotina de treino e backprop idêntica.</p>
+<h2 id="code_3">Code:<a class="headerlink" href="#code_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">321</span><span class="p">)</span>
+
+
+<span class="n">n_total</span> <span class="o">=</span> <span class="mi">1500</span>
+<span class="n">n_per</span> <span class="o">=</span> <span class="n">n_total</span> <span class="o">//</span> <span class="mi">3</span>
+
+
+<span class="n">sizes0</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_per</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_per</span> <span class="o">-</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">X0_parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes0</span><span class="p">):</span>
+    <span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                 <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">70</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">yk</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">X0_parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span><span class="p">))</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X0_parts</span><span class="p">]);</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X0_parts</span><span class="p">])</span>
+
+
+<span class="n">sizes1</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_per</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_per</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n_per</span><span class="o">//</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">X1_parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes1</span><span class="p">):</span>
+    <span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                 <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">80</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">yk</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">X1_parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span><span class="p">))</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X1_parts</span><span class="p">]);</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X1_parts</span><span class="p">])</span>
+
+
+<span class="n">sizes2</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_per</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">n_per</span><span class="o">//</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">X2_parts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes2</span><span class="p">):</span>
+    <span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">ns</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                 <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                 <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">90</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">yk</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">X2_parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Xk</span><span class="p">,</span> <span class="n">yk</span><span class="p">))</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X2_parts</span><span class="p">]);</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">X2_parts</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X0</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">Xtr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">ytr</span><span class="p">,</span> <span class="n">yte</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="n">C</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">ytr_oh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">C</span><span class="p">)[</span><span class="n">ytr</span><span class="p">]</span>
+
+<span class="n">in_features</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">h1_size</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">h2_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">out_features</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">W1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">h1_size</span><span class="p">,</span> <span class="n">in_features</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">in_features</span><span class="p">)</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">h1_size</span><span class="p">,))</span>
+
+<span class="n">W2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">h2_size</span><span class="p">,</span> <span class="n">h1_size</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h1_size</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">h2_size</span><span class="p">,))</span>
+
+<span class="n">W3</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">out_features</span><span class="p">,</span> <span class="n">h2_size</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h2_size</span><span class="p">)</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">out_features</span><span class="p">,))</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">3e-2</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">350</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-12</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">Xs</span> <span class="o">=</span> <span class="n">Xtr</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">ytr_oh</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="n">Xs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">yb</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+
+
+        <span class="n">z1</span> <span class="o">=</span> <span class="n">xb</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b1</span>
+        <span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+
+        <span class="n">z2</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b2</span>
+        <span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
+
+        <span class="n">U</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b3</span> 
+        <span class="n">Umax</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">Umax</span><span class="p">)</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">ex</span> <span class="o">/</span> <span class="n">ex</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+        <span class="n">yclip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">eps</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yb</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yclip</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+
+        <span class="n">B</span> <span class="o">=</span> <span class="n">yb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dL_dU</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">yb</span><span class="p">)</span> <span class="o">/</span> <span class="n">B</span>  
+
+        <span class="n">dL_dW3</span> <span class="o">=</span> <span class="n">dL_dU</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">h2</span>
+        <span class="n">dL_db3</span> <span class="o">=</span> <span class="n">dL_dU</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">dL_dh2</span> <span class="o">=</span> <span class="n">dL_dU</span> <span class="o">@</span> <span class="n">W3</span>
+        <span class="n">dL_dz2</span> <span class="o">=</span> <span class="n">dL_dh2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">dL_dW2</span> <span class="o">=</span> <span class="n">dL_dz2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">h1</span>
+        <span class="n">dL_db2</span> <span class="o">=</span> <span class="n">dL_dz2</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">dL_dh1</span> <span class="o">=</span> <span class="n">dL_dz2</span> <span class="o">@</span> <span class="n">W2</span>
+        <span class="n">dL_dz1</span> <span class="o">=</span> <span class="n">dL_dh1</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">dL_dW1</span> <span class="o">=</span> <span class="n">dL_dz1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">xb</span>
+        <span class="n">dL_db1</span> <span class="o">=</span> <span class="n">dL_dz1</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">W3</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW3</span>
+        <span class="n">b3</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db3</span>
+        <span class="n">W2</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW2</span>
+        <span class="n">b2</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db2</span>
+        <span class="n">W1</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_dW1</span>
+        <span class="n">b1</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">dL_db1</span>
+
+    <span class="k">if</span> <span class="n">ep</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ep</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;epoch </span><span class="si">{</span><span class="n">ep</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2"> | loss </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">z1</span> <span class="o">=</span> <span class="n">Xte</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b1</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+<span class="n">z2</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b2</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">h2</span> <span class="o">@</span> <span class="n">W3</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">b3</span>
+<span class="n">Umax</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">Umax</span><span class="p">)</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">ex</span> <span class="o">/</span> <span class="n">ex</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">ypred</span> <span class="o">==</span> <span class="n">yte</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test accuracy (deeper, 2 hidden): </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="result_3">Result:<a class="headerlink" href="#result_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>epoch<span class="w">   </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.9812
+epoch<span class="w">  </span><span class="m">50</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.7336
+epoch<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.6125
+epoch<span class="w"> </span><span class="m">150</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.5455
+epoch<span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.3711
+epoch<span class="w"> </span><span class="m">250</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.4223
+epoch<span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.4229
+epoch<span class="w"> </span><span class="m">350</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="m">0</span>.4302
+
+Test<span class="w"> </span>accuracy<span class="w"> </span><span class="o">(</span>deeper,<span class="w"> </span><span class="m">2</span><span class="w"> </span>hidden<span class="o">)</span>:<span class="w"> </span><span class="m">0</span>.700
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
