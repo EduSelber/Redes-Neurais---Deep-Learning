@@ -66,4 +66,3 @@ O experimento demonstra o funcionamento prático de um **Variational Autoencoder
 - **Capacidade generativa realista**,  
 - **Organização semântica no espaço latente**.
 
-O modelo atendeu a todos os objetivos do exercício, ilustrando de forma clara a relação entre **autoencoders**, **aprendizado de representações** e **geração de dados**.
