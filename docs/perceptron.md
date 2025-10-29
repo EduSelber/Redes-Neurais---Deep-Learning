@@ -26,6 +26,7 @@ y  = np.hstack([np.zeros(samples_per_class, dtype=int), np.ones(samples_per_clas
 !["Exercise 1"](imgs/perceptron/image1.png)
 
 ### Perceptron Implementation Task:
+
 ```python
 
 r=0.01 

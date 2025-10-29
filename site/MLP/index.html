@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
@@ -201,26 +201,6 @@
   
   
   
-    
-    
-      <li class="md-tabs__item">
-        <a href="../guia/instalacao.md" class="md-tabs__link">
-          
-  
-  
-  Guia
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
     <li class="md-tabs__item">
       <a href="../data/" class="md-tabs__link">
         
@@ -357,102 +337,6 @@
   
 
       </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Guia
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Guia
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../guia/instalacao.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Instalação
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../guia/uso.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Uso
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -980,7 +864,7 @@
 <h2 id="a-brief-description-of-my-approach">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach" title="Permanent link">&para;</a></h2>
 <p>Implemento, em código direto e sem funções, o fluxo completo forward → loss → backward → update de um MLP com tanh na camada escondida e na saída, usando MSE para uma única amostra. Imprimo todas as grandezas intermediárias (pré-ativações, ativações, gradientes de pesos e vieses) e faço a atualização com η = 0,1, para validar numericamente a cadeia de derivadas que será reutilizada nos demais exercícios.</p>
 <h2 id="code">Code:<a class="headerlink" href="#code" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1080,9 +964,9 @@ Updated<span class="w"> </span>parameters<span class="w"> </span><span class="o"
 <h2 id="a-brief-description-of-my-approach_1">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach_1" title="Permanent link">&para;</a></h2>
 <p>Gero um conjunto binário com make_classification, em que a classe 0 tem 1 cluster e a classe 1 tem 2 clusters. Treino um MLP 2–32–1 escrito inline tanh na escondida, sigmoid na saída e Binary Cross-Entropy como perda. O treinamento é via mini-batch gradient descent, com retropropagação manual dos gradientes e avaliação por acurácia no conjunto de teste.</p>
 <h2 id="code_1">Code:<a class="headerlink" href="#code_1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 
@@ -1192,9 +1076,9 @@ Test<span class="w"> </span>accuracy<span class="w"> </span><span class="o">(</s
 <h2 id="a-brief-description-of-my-approach_2">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach_2" title="Permanent link">&para;</a></h2>
 <p>Formulo um problema multiclasse (3 classes, 4 features), construindo 2/3/4 clusters por classe pela união de subconjuntos. Treino um MLP 4–64–3 também inline, trocando a cabeça para softmax + cross-entropy. Para estabilidade numérica, subtraio o máximo por amostra antes do exp e aplico clipping nas probabilidades; a lógica de treino e retroprop permanece a mesma do Ex. 2, evidenciando reuso conceitual.</p>
 <h2 id="code_2">Code:<a class="headerlink" href="#code_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
 
@@ -1325,9 +1209,9 @@ Test<span class="w"> </span>accuracy<span class="w"> </span><span class="o">(</s
 <h2 id="a-brief-description-of-my-approach_3">A brief description of my approach<a class="headerlink" href="#a-brief-description-of-my-approach_3" title="Permanent link">&para;</a></h2>
 <p>Repito o cenário do Ex. 3, mas aprofundo o modelo para 4–64–32–3, adicionando uma segunda camada escondida. Mantenho a implementação inline e os mesmos cuidados numéricos (softmax estabilizado + CE), comparando a acurácia de teste com a versão menos profunda para observar o impacto da profundidade sob uma rotina de treino e backprop idêntica.</p>
 <h2 id="code_3">Code:<a class="headerlink" href="#code_3" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">321</span><span class="p">)</span>
 

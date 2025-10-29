@@ -4,11 +4,12 @@
 
 
 ## Exercício 1 — *Exploring Class Separability in 2D*
-## A brief description of my approach
+
+### A brief description of my approach
 
 Para gerar os dados, utilizo distribuições normais multivariadas com a função random.multivariate_normal do numpy, cada um com média e covariância diferentes. Cada ponto recebe um rótulo de classe correspondente ao cluster de origem.
 
-## Generate  the data:
+### Generate  the data:
 
 ```python
 data = {'x': [], 'y':[], 'class':[], 'color': []}
