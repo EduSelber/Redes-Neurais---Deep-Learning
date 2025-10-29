@@ -1,17 +1,30 @@
-# Welcome to MkDocs
+#  Bem-vindo
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+##  Disclaimer
 
-## Commands
+As atividades apresentadas neste site foram desenvolvidas com **assistência de Inteligência Artificial (ChatGPT)**, utilizada com o objetivo de:
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+- **Aprimorar a redação** de textos nas documentações, corrigindo ortografia e estilo;  
+- **Gerar e personalizar gráficos** para melhor visualização dos resultados;  
+- **Otimizar o layout** e a organização visual das páginas.  
 
-## Project layout
+---
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+##  Repositórios dos Trabalhos em Grupo
+
+###  Projeto 1 — *Classification*
+Página do projeto:  
+🔗 [https://github.com/lucasouzamil/mlp-classification/deployments/github-pages](https://github.com/lucasouzamil/mlp-classification/deployments/github-pages)
+
+
+
+---
+
+###  Projeto 2 — *Regression (ANN)*
+Página do projeto:  
+🔗 [https://lucasouzamil.github.io/ann-regression](https://lucasouzamil.github.io/ann-regression)
+
+
+
+---
+
