@@ -68,9 +68,9 @@ for epoch in range(1, max_epochs+1):
 !["Exercise 2 "](imgs/perceptron/image2.png)
 ### Reporting results
 
-Pesos finais w: [0.04894919 0.06400311]
-Viés final b: -0.3200000000000001
-accuracia finalaa: 99.60%
+- Pesos finais w: [0.04894919 0.06400311]
+- Viés final b: -0.3200000000000001
+- acurácia final: 99.60%
 
 Para entender o motivo da convergência rápida, é necessário explicar que o Perceptron funciona com uma regra de atualização: sempre que um ponto é classificado incorretamente, os pesos são ajustados na direção correta para reduzir o erro. Neste caso, como há uma separabilidade linear clara entre as classes, o algoritmo atinge a convergência rapidamente, pois não há necessidade de muitas atualizações para encontrar uma fronteira de decisão adequada.
 
