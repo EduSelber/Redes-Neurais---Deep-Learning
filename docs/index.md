@@ -28,3 +28,8 @@ Página do projeto:
 
 ---
 
+###  Projeto 3 — *Generativ*
+Página do projeto:  
+🔗 [https://lucasouzamil.github.io/entregas-redes-neurais/projetos/generative/main/](https://lucasouzamil.github.io/entregas-redes-neurais/projetos/generative/main/)
+
+---
